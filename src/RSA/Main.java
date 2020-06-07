@@ -30,23 +30,23 @@ public class Main {
             }
         }
         System.out.println("p = " + p + " and q = " + q + " n = " + n + " fn = " + fn + " e = " + e + " d = " + d);
-        System.out.println("You want to encrypt(E) or decrypt(D) the message");
+        System.out.println("Do you want to encrypt(E) or decrypt(D) " + msg + "?");
         String path = scanner.next();
         if (path.equals("E")){
-            BigInteger c = msg.pow(e).mod(n);
+            BigInteger c = msg.modPow(BigInteger.valueOf(e),n);
             System.out.println("Encrypted message (c) is " + c);
-            BigInteger m = msg.modPow(BigInteger.valueOf(d),n);
+            BigInteger m = c.modPow(BigInteger.valueOf(d),n);
             System.out.println("Decrypted message of (c = " + c + ") is " + m);
         }else if (path.equals("D")){
             System.out.println("Enter value for d");
-            int decD = scanner.nextInt();
+            d = scanner.nextInt();
             System.out.println("Enter value for n");
-            BigInteger decN = BigInteger.valueOf(scanner.nextInt());
+            n = BigInteger.valueOf(scanner.nextInt());
             System.out.println("Enter value for e");
-            int decE = scanner.nextInt();
-            BigInteger m = msg.modPow(BigInteger.valueOf(decD),decN);
+            e = scanner.nextInt();
+            BigInteger m = msg.modPow(BigInteger.valueOf(d),n);
             System.out.println("Decrypted message with public key d(" + d + ") and n(" + n + ") is equal to " + m);
-            BigInteger c = msg.modPow(BigInteger.valueOf(decE),decN);
+            BigInteger c = m.modPow(BigInteger.valueOf(e),n);
             System.out.println("Encrypted message of (m = " + m + ") is " + c);
         }else {
             System.out.println("Wrong input");
