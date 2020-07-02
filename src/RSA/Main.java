@@ -22,7 +22,7 @@ public class Main {
             d = 0;
             for (int i = 3; i < fn; i++){
                 e = i;
-                if (GCD.gcd(e,fn)==1)
+                if (GCD.EEA(e,fn)==1)
                     break;
             }
             for(int i=0;i<=9;i++)
@@ -39,9 +39,9 @@ public class Main {
                 System.out.println("Message have to be less than " + n + ". Enter other message!");
                 msg = BigInteger.valueOf(scanner.nextInt());
             }
-            BigInteger c = msg.modPow(BigInteger.valueOf(e),n);
+            BigInteger c = FME.fme(msg,BigInteger.valueOf(e),n);
             System.out.println("Encrypted message (c) is " + c);
-            BigInteger m = c.modPow(BigInteger.valueOf(d),n);
+            BigInteger m = FME.fme(c,BigInteger.valueOf(d),n);
             System.out.println("Decrypted message of (c = " + c + ") is " + m);
         }else if (path.equals("D")){
             System.out.println("Enter value for d");
@@ -50,9 +50,9 @@ public class Main {
             n = BigInteger.valueOf(scanner.nextInt());
             System.out.println("Enter value for e");
             e = scanner.nextInt();
-            BigInteger m = msg.modPow(BigInteger.valueOf(d),n);
+            BigInteger m = FME.fme(msg,BigInteger.valueOf(d),n);
             System.out.println("Decrypted message with public key d(" + d + ") and n(" + n + ") is equal to " + m);
-            BigInteger c = m.modPow(BigInteger.valueOf(e),n);
+            BigInteger c = FME.fme(m,BigInteger.valueOf(e),n);
             System.out.println("Encrypted message of (m = " + m + ") is " + c);
         }else {
             System.out.println("Wrong input");
